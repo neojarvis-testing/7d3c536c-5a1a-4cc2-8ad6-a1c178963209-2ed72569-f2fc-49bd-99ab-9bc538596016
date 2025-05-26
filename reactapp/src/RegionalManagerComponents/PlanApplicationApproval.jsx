@@ -3,16 +3,17 @@ import React from "react";
 const PlanApplicationApproval = ()=>{
     return(
         <div>
-            <h1>Savings Plans</h1>
+            <h1>Savings Plans Applications</h1>
             <table>
                 <thead>
                     <tr>
+                        <th>Application Id</th>
                         <th>Plan Name</th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {/* render planss here */}
+                    {/* render  here */}
                 </tbody>
             </table>
         </div>
