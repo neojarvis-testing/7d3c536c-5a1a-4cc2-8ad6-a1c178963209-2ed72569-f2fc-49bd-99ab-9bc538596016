@@ -1,11 +1,12 @@
 import React,{useState} from 'react';
+import {useHis}
 
 const Login =()=>{
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [errors,setErrors] = useState('');
 
-    const handleLogin = (e) =>{
+    const handleLogin = async (e) =>{
         e.preventDefault();
         const newErrors = {};
         if(!email) newErrors.email = 'Email is required';
@@ -13,7 +14,13 @@ const Login =()=>{
         setErrors(newErrors);
 
         if(Object.keys(newErrors).length === 0){
-            //call login app
+            try{
+                const response = await loginUser({email,password});
+                localStorage.setItem('token', response.data.token);
+                history.pushState('/'); //redirect to home page
+            }catch(err){
+                setErrors({...err, login:'Invalid credentials'});
+            }
         }
     };
 
@@ -38,6 +45,7 @@ const Login =()=>{
                 />
                 {errors.password && <p>{errors.password}</p>}
                 <button type="submit">Login</button>
+                {errors.login && <p>{errors.login}</p>}
             </form>
         </div>
     )
