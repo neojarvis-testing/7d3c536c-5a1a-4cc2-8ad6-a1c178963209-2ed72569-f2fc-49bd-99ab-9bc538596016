@@ -1,11 +1,21 @@
 import React,{useState} from 'react';
-
+import {addInquiry } from '../apiConfig';
 const InquiryForm =()=>{
     const [message,setMessage] = useState('');
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = async(e) =>{
         e.preventDefault();
-        //handle inquiry submission logic
+        const requestBody = {
+            message: message,
+            replied : "",// replace
+            userId : 1,/////replace this            
+        };
+        try{
+            const reponse = await addInquiry (requestBody);
+            console.log("Inquiry submitted...: ", reponse.data);
+           }catch(err){
+            console.error("error submitting the Inquiry.... : ",err);
+           }
     };
 
     return(

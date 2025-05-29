@@ -21,7 +21,7 @@ export const addSavinsPlan = (savingsPlan)=>{
     return apiClient.post('/savingsPlans', savingsPlan);
 }
 
-export const getAllSavingsPlan = ()=>{
+export const getAllSavingsPlans = ()=>{
     return apiClient.get('/savingsPlans');
 }
 
@@ -58,3 +58,8 @@ export const getAllInquiries = ()=>{
 export const getInquiryById = (id)=>{
     return apiClient.get(`/inquires/${id}`);
 }
+
+
+// export const updateInquiry = (id,inquiry)=>{
+//     return apiClient.put(`/savingsPlans/${id}`,savingsPlan);
+// }

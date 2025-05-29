@@ -1,5 +1,5 @@
 import React from "react";
-
+// import {getAll } from '../apiConfig';
 const PlanApplicationApproval = ()=>{
     return(
         <div>

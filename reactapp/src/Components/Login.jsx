@@ -1,10 +1,12 @@
 import React,{useState} from 'react';
-import {useHis}
+import {useHistory} from 'react-router-dom';
+import {loginUser } from '../apiConfig';
 
 const Login =()=>{
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [errors,setErrors] = useState('');
+    const history = useHistory();
 
     const handleLogin = async (e) =>{
         e.preventDefault();

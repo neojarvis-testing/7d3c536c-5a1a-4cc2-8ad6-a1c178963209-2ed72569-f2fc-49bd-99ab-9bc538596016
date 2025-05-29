@@ -1,11 +1,21 @@
 import React,{useState} from 'react';
-
+import {addFeedback } from '../apiConfig';
 const CustomerPostFeedback =()=>{
     const [feedbackText,setFeedbackText] = useState('');
     
-    const handleSubmit = (e) =>{
+    const handleSubmit = async (e) =>{
         e.preventDefault();
-        //handle logic
+        const requestBody = {
+            feedbackText: feedbackText,
+            date : new Date().toISOString(),
+            userId : 1,/////replace this            
+        };
+        try{
+            const reponse = await addFeedback (requestBody);
+            console.log("feedback submitted...: ", reponse.data);
+           }catch(err){
+            console.error("error submitting the feedback.... : ",err);
+           }
     };
 
     return(

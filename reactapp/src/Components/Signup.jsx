@@ -1,4 +1,6 @@
 import React,{useState} from 'react';
+import {useHistory} from 'react-router-dom';
+import {registerUser } from '../apiConfig';
 const Signup=()=>{
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -6,8 +8,9 @@ const Signup=()=>{
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errors,setErrors] = useState('');
+    const history = useHistory();
 
-    const handleSignup =(e)=>{
+    const handleSignup = async (e)=>{
         e.preventDefault();
         const newErrors = {};
         if(!username) newErrors.username = 'User Name is required';
@@ -19,7 +22,12 @@ const Signup=()=>{
         setErrors(newErrors);
 
         if(Object.keys(newErrors).length === 0){
-            //call sign up app
+           try{
+            await registerUser ({username, email, mobileNumber, password});
+            history.push('/login'); //redirect to login page
+           }catch(err){
+            setErrors({...err, signup:'Registration failed '});
+           }
         }
     };
 
@@ -66,6 +74,7 @@ const Signup=()=>{
                 {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
                 {errors.passwordMisMatch && <p>{errors.passwordMisMatch}</p>}
                 <button type="submit">Register</button>
+                {errors.signup && <p>{errors.signup}</p>}
             </form>
         </div>
     )

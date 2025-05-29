@@ -1,6 +1,18 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import {getAllInquiries } from '../apiConfig';
 const ViewInquiry = ()=>{
+    const [inquiries, setInquiries] = useState();
+    useEffect(()=>{
+        const fecthInquiries = async()=>{
+            try{
+                const response = await getAllInquiries();
+                setFeedbacks(response.data);
+            }catch(err){
+                console.log('erro detching inquiries: ',err);
+            }
+        };
+        fecthInquiries();
+    },[]);
     return(
         <div>
             <h1>View Inquiries</h1>
@@ -13,7 +25,13 @@ const ViewInquiry = ()=>{
                     </tr>
                 </thead>
                 <tbody>
-                    {/* render inquiries here */}
+                {inquiries.map(inquiry=>(
+                        <tr key={inquiry.inquiryId}>
+                            <td>{inquiry.inquiryId}</td>
+                            <td>{inquiry.message}</td>
+                            <td>{inquiry.replied ? 'Replied' : 'Pending'}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>
