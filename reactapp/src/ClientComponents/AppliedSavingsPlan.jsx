@@ -1,6 +1,6 @@
 import React from "react";
 
-const HomePage = ()=>{
+const AppliedSavingsPlan = ()=>{
     return(
         <div>
             <h1>Applied Plans</h1>
@@ -19,4 +19,4 @@ const HomePage = ()=>{
         </div>
     )
 }
-export default Could not paste;
+export default AppliedSavingsPlan;
