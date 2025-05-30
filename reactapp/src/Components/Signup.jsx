@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {registerUser } from '../apiConfig';
 const Signup=()=>{
     const [username, setUsername] = useState('');
@@ -8,7 +8,7 @@ const Signup=()=>{
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errors,setErrors] = useState('');
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleSignup = async (e)=>{
         e.preventDefault();
@@ -24,7 +24,7 @@ const Signup=()=>{
         if(Object.keys(newErrors).length === 0){
            try{
             await registerUser ({username, email, mobileNumber, password});
-            history.push('/login'); //redirect to login page
+            navigate('/login'); //redirect to login page
            }catch(err){
             setErrors({...err, signup:'Registration failed '});
            }

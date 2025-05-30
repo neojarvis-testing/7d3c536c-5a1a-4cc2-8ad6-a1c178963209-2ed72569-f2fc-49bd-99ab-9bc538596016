@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './Components/HomePage';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
@@ -17,14 +17,12 @@ import CustomerPostFeedback from './ClientComponents/CustomerPostFeedback';
 import ViewAllSavingsPlan from './ClientComponents/ViewAllSavingsPlan';
 import SavingsPlanForm from './FinancialConsultantComponents/ViewSavingsPlan';
 import ViewSavingsPlan from './FinancialConsultantComponents/ViewSavingsPlan';
-import PlanApplicationApproval from './ClientComponents/PlanApplicationApproval';
-import ErrorPage from './Components/ErrorPage';
-import PrivateRoute from './Components/PrivateRoute';
+import PlanApplicationApproval from './RegionalManagerComponents/PlanApplicationApproval';
 
 const App = ()=>{
     return(
         <Router>
-            <Switch>
+            <Routes>
                 <Route path='/' exact component={HomePage}/>
                 <Route path='/login' exact component={Login}/>
                 <Route path='/signup' exact component={Signup}/>
@@ -43,7 +41,8 @@ const App = ()=>{
                 <PrivateRoute path='/plan-application-approval' component={PlanApplicationApproval} />
                 <Route path='/error' exact component={ErrorPage}/>
                 <Route component={ErrorPage}/>
-            </Switch>
+            </Routes>
         </Router>
     )
 }
+export default App;

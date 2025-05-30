@@ -6,7 +6,7 @@ const ViewInquiry = ()=>{
         const fecthInquiries = async()=>{
             try{
                 const response = await getAllInquiries();
-                setFeedbacks(response.data);
+                setInquiries(response.data);
             }catch(err){
                 console.log('erro detching inquiries: ',err);
             }

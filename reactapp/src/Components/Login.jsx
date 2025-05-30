@@ -1,12 +1,12 @@
 import React,{useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {loginUser } from '../apiConfig';
 
 const Login =()=>{
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [errors,setErrors] = useState('');
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleLogin = async (e) =>{
         e.preventDefault();
@@ -19,7 +19,7 @@ const Login =()=>{
             try{
                 const response = await loginUser({email,password});
                 localStorage.setItem('token', response.data.token);
-                history.pushState('/'); //redirect to home page
+                navigate('/'); //redirect to home page
             }catch(err){
                 setErrors({...err, login:'Invalid credentials'});
             }
@@ -43,7 +43,7 @@ const Login =()=>{
                     type='password'
                     placeholder='Password'
                     value={password}
-                    onChange={(e)=> setEmail(e.target.value)}
+                    onChange={(e)=> setPassword(e.target.value)}
                 />
                 {errors.password && <p>{errors.password}</p>}
                 <button type="submit">Login</button>

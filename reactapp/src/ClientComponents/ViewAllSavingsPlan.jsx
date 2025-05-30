@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {getAllSavingsPlan } from '../apiConfig';
+import {getAllSavingsPlans } from '../apiConfig';
 const ViewAllSavingsPlan = ()=>{
     const [plans, setPlans] = useState();
     useEffect(()=>{
         const fecthPlan = async()=>{
             try{
-                const response = await getAllSavingsPlan();
+                const response = await getAllSavingsPlans();
                 setPlans(response.data);
             }catch(err){
                 console.log('erro detching savings plans: ',err);
