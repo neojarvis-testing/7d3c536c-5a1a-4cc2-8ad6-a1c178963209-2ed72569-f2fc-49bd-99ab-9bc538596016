@@ -1,28 +1,29 @@
-package main.java.com.examly.springappuser.service;
+package com.examly.springappuser.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import com.examly.springappuser.model.User;
-import com.examly.springappuser.repsitory.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BcryptPasswordEncoder;
-import org.springframework.stereotype.service;
+import com.examly.springappuser.repository.UserRepository;
+
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    private BcryptPasswordEncoder pwdEncoder = new BcryptPasswordEncoder();
+    private BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
 
-    public User registerUser(main.java.com.examly.springappuser.model.User user){
+    public User registerUser(User user){
         user.setPassword(pwdEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
     public User loginUser(String email, String password){
-        main.java.com.examly.springappuser.model.User user =  userRepository.findByEmail(email);
+        User user =  userRepository.findByEmail(email);
         if(user!= null && pwdEncoder.matches(password, user.getPassword())){
             return user;
         }
         return null;
     }
-    
 }
